@@ -47,6 +47,18 @@ function RenderComments({comments}) {
     }
 }
 
+function RenderName({name}) {
+    if(name != null) {
+        const dishName = name.map((dish) => {
+            return(
+                <>{dish.name}</>
+            );
+        });
+
+        return dishName;
+    }
+}
+
 const DishDetails = (props) => {
     if(props.dish != null) {
         return(
@@ -59,10 +71,14 @@ const DishDetails = (props) => {
                         <BreadcrumbItem>
                             <Link to="/menu">Menu</Link>
                         </BreadcrumbItem>
-                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            <RenderName name={props.dish}/>
+                        </BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                        <h3>{props.dish.name}</h3>
+                        <h3>
+                            <RenderName name={props.dish}/>
+                        </h3>
                         <hr/>
                     </div>
                 </div>

@@ -31,3 +31,7 @@ address{
 .navbar-dark, div.nav-dark {
     background-color: #512DA8;
 }
+
+.row-about{
+    margin-top: 1rem;
+}
