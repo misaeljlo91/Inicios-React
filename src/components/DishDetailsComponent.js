@@ -4,6 +4,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (value) => value && value.length;
 const maxLength = (len) => (value) => !(value) || (value.length <= len);
@@ -123,7 +124,7 @@ function RenderDish({dish}) {
                 {dish.map((details) => {
                     return(
                         <Card key={details.id}>
-                            <CardImg width='100%' src={details.image} alt={details.name}/>
+                            <CardImg width='100%' src={baseUrl + details.image} alt={details.name}/>
                             <CardBody>
                                 <CardTitle>{details.name}</CardTitle>
                                 <CardText>{details.description}</CardText>
