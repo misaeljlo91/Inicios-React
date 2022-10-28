@@ -1,25 +1,36 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardTitle, CardText, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeaders({leaders}) {
     if(leaders != null) {
+        
         const leaderDetail = leaders.map((leader) => {
             return(
                 <div key={leader.id} className="row row-about">
                     <div className='col-2'>
-                        <img src={leader.image} alt={leader.name}/>
+                        <Stagger in>
+                            <Fade in>
+                                <img src={baseUrl + leader.image} alt={leader.name}/>
+                            </Fade>
+                        </Stagger>
                     </div>
                     <div className='col-10'>
-                        <CardBody>
-                            <CardTitle>
-                                <h3>{leader.name}</h3>
-                            </CardTitle>
-                            <CardText>
-                                <p>{leader.designation}</p>
-                                <p>{leader.description}</p>
-                            </CardText>
-                        </CardBody> 
+                        <Stagger in>
+                            <Fade in>
+                                <CardBody>
+                                    <CardTitle>
+                                        <h3>{leader.name}</h3>
+                                    </CardTitle>
+                                    <CardText>
+                                        <p>{leader.designation}</p>
+                                        <p>{leader.description}</p>
+                                    </CardText>
+                                </CardBody> 
+                            </Fade>
+                        </Stagger>
                     </div>
                 </div>
             );
