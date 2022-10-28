@@ -30,7 +30,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dish, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -141,26 +141,22 @@ function RenderDish({dish}) {
     }
 }
 
-function RenderComments({comments, dish, addComment}) {
+function RenderComments({comments, dishId, postComment}) {
     if(comments != null) {
         return(
             <div className='col-12 col-md-5 m-1'>
                 <h4>Comments</h4>
-                <ul className='list-unstyled'>
                     {comments.map((comment) => {
                         return(
-                            <li key={comment.id}> 
-                                <p>{comment.comment}</p>
-                                <p>-- {comment.author} - {moment(comment.date).format('ll')}</p>
-                            </li>
+                            <ul className='list-unstyled'>
+                                <li key={comment.id}> 
+                                    <p>{comment.comment}</p>
+                                    <p>-- {comment.author} - {moment(comment.date).format('ll')}</p>
+                                </li>
+                            </ul>
                         );
                     })}
-                </ul>
-                {dish.map((dishId) => {
-                    return(
-                        <CommentForm dish={dishId.id} addComment={addComment}/>
-                    );
-                })}
+                    <CommentForm dishId={dishId} postComment={postComment}/>
             </div>
         );
     }else{
@@ -215,10 +211,14 @@ const DishDetails = (props) => {
                 </div>
                 <div className='row'>
                     <RenderDish dish={props.dish}/>
-                    <RenderComments comments={props.comments}
-                        addComment={props.addComment}
-                        dish={props.dish}
-                    />
+                    {props.dish.map((dish) => {
+                        return(
+                            <RenderComments comments={props.comments}
+                                postComment={props.postComment}
+                                dishId={dish.id}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         );
